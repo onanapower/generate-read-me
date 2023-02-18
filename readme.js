@@ -53,17 +53,18 @@ const promptUser = () =>
     },
   ]);
 
-const generateHTML = (answers) =>
-  `# $(answers.title)
+const generateREADME = (answers) =>
+  `
+# ${answers.title}
 
 ## Table of Content
-- [project description](#Description)
+- [project description](#description)
 - [usage](#usage)
-- [project License](#License)
-- [Contibuting](#Contibuting)
-- [Test](#Test)
-- [Questions](#Questions)
-- [Installations](#Installations)
+- [project License](#license)
+- [Contibuting](#contibuting)
+- [Test](#test)
+- [Questions](#questions)
+- [Installations](#installations)
 
 ## Description
 ${answers.description}
@@ -87,6 +88,6 @@ ${answers.questions}
 ${answers.test}`;
 
 promptUser()
-  .then((answers) => writeFileAsync("README.md", generateHTML(answers)))
+  .then((answers) => writeFileAsync("README.md", generateREADME(answers)))
   .then(() => console.log("Successfully generated a README.md"))
   .catch((err) => console.error(err));
