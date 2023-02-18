@@ -1,8 +1,8 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-const propmtUser = () =>
-  inquirer.prompt([
+inquirer
+  .prompt([
     /* Pass your questions in here */
     {
       type: "input",
@@ -16,11 +16,6 @@ const propmtUser = () =>
     },
     {
       type: "input",
-      name: "Tableofcontents",
-      message: "List your table of contents",
-    },
-    {
-      type: "input",
       name: "installation",
       message: "how can it be installed?",
     },
@@ -28,6 +23,15 @@ const propmtUser = () =>
       type: "input",
       name: "usage",
       message: "How can you use it?",
+    },
+    {
+      type: "list",
+      name: "licenses",
+      messages: "license?",
+      choices: ["MIT", "ISC", "GNUPLv3"],
+      filter(val) {
+        return val.toLowerCase();
+      },
     },
     {
       type: "input",
@@ -44,16 +48,16 @@ const propmtUser = () =>
       name: "questions",
       message: "what are the frequently asked questions",
     },
-  ]);
+  ])
 
-//   .then((answers) => {
-//     // Use user feedback for... whatever!!
-//     console.log(answers);
-//   })
-//   .catch((error) => {
-//     if (error.isTtyError) {
-//       // Prompt couldn't be rendered in the current environment
-//     } else {
-//       // Something else went wrong
-//     }
-//   });
+  .then((answers) => {
+    // Use user feedback for... whatever!!
+    console.log(answers);
+  })
+  .catch((error) => {
+    if (error.isTtyError) {
+      // Prompt couldn't be rendered in the current environment
+    } else {
+      // Something else went wrong
+    }
+  });
