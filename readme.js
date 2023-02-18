@@ -1,10 +1,8 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-
-const propmtUser () =>
-inquirer
-  .prompt([
+const propmtUser = () =>
+  inquirer.prompt([
     /* Pass your questions in here */
     {
       type: "input",
@@ -18,7 +16,7 @@ inquirer
     },
     {
       type: "input",
-      name: "Ttableofcontents",
+      name: "Tableofcontents",
       message: "List your table of contents",
     },
     {
@@ -46,16 +44,16 @@ inquirer
       name: "questions",
       message: "what are the frequently asked questions",
     },
-  ])
+  ]);
 
-  .then((answers) => {
-    // Use user feedback for... whatever!!
-    console.log(answers);
-  })
-  .catch((error) => {
-    if (error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
-    } else {
-      // Something else went wrong
-    }
-  });
+//   .then((answers) => {
+//     // Use user feedback for... whatever!!
+//     console.log(answers);
+//   })
+//   .catch((error) => {
+//     if (error.isTtyError) {
+//       // Prompt couldn't be rendered in the current environment
+//     } else {
+//       // Something else went wrong
+//     }
+//   });
