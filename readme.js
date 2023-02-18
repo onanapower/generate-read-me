@@ -44,12 +44,17 @@ const promptUser = () =>
     {
       type: "input",
       name: "test",
-      message: "how can you test",
+      message: "how can you test this project?",
     },
     {
       type: "input",
-      name: "questions",
-      message: "what are the frequently asked questions",
+      name: "email",
+      message: "For questions, send email to:",
+    },
+    {
+      type: "input",
+      name: "github",
+      message: "For questions, input your github account:",
     },
   ]);
 
@@ -82,7 +87,8 @@ ${answers.installation}
 ${answers.contributors}
 
 ## Questions
-${answers.questions}
+${answers.email}
+${answers.github}
 
 ## Test
 ${answers.test}`;
