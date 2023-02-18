@@ -1,17 +1,20 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+const util = require("util");
 
-inquirer
-  .prompt([
+const writeFileAsync = util.promisify(fs.writeFile);
+
+const promptUser = () =>
+  inquirer.prompt([
     /* Pass your questions in here */
     {
       type: "input",
-      name: "Title",
+      name: "title",
       message: "The title of the project?",
     },
     {
       type: "input",
-      name: "Description",
+      name: "description",
       message: "Kindly describe your project?",
     },
     {
@@ -48,16 +51,42 @@ inquirer
       name: "questions",
       message: "what are the frequently asked questions",
     },
-  ])
+  ]);
 
-  .then((answers) => {
-    // Use user feedback for... whatever!!
-    console.log(answers);
-  })
-  .catch((error) => {
-    if (error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
-    } else {
-      // Something else went wrong
-    }
-  });
+const generateHTML = (answers) =>
+  `# $(answers.title)
+
+## Table of Content
+- [project description](#Description)
+- [usage](#usage)
+- [project License](#License)
+- [Contibuting](#Contibuting)
+- [Test](#Test)
+- [Questions](#Questions)
+- [Installations](#Installations)
+
+## Description
+${answers.description}
+
+## usage
+${answers.usage}
+
+## License
+${answers.licensce}
+
+## Installations
+${answers.installation}
+
+## Contributing
+${answers.contributors}
+
+## Questions
+${answers.questions}
+
+## Test
+${answers.test}`;
+
+promptUser()
+  .then((answers) => writeFileAsync("README.md", generateHTML(answers)))
+  .then(() => console.log("Successfully generated a README.md"))
+  .catch((err) => console.error(err));
