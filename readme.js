@@ -1,3 +1,4 @@
+//Required modules/dependencies for the readmefile
 const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
@@ -49,18 +50,52 @@ const promptUser = () =>
     {
       type: "input",
       name: "email",
-      message: "For questions, send email to:",
+      message: "Add your email address here for questions",
     },
     {
       type: "input",
       name: "github",
-      message: "For questions, input your github account:",
+      message: "For questions, input your github profile link:",
     },
   ]);
 
-const generateREADME = (answers) =>
-  `
-# ${answers.title}
+const generateREADME = (answers) => {
+  // show badge function to indicate the license a user opted out for
+  function showBadge(license) {
+    const diffBadge = {
+      gnuplv3:
+        "[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licence/lgpl-3.0)",
+      isc: "[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)",
+      mit: "[![License: MIT](https://img.shields.io/badge/Licence-MIT-yellow.svg)](https://opensources.org/MIT)",
+    };
+    return diffBadge[license];
+  }
+
+  //second function:
+
+  function showlicensedlinks(licence) {
+    const licensedlinks = {
+      GNUPLv3: "[GNUPLv3](https://choosealicense.com/licenses/gpl-3.0/)",
+      isc: "[ISC](https://https://choosealicense.com/licenses/isc/)",
+      mit: "[MIT](https://https://choosealicense.com/licenses/mit/)",
+    };
+    return licensedlinks[licence];
+  }
+
+  //3rd function:
+  function presentlicensetext() {
+    if (license) {
+      return `Licensed under the ${showlicensedlinks(license)} license`;
+    } else {
+      return "license not found";
+    }
+  }
+  // line 75 below is the expected place for the license badge to appear
+  //line 95 is where the license link will be clicked
+  //Below is the mark up language for the readme file with appended template literals
+  `# ${answers.title}
+
+${showBadge(answers.license)}
 
 ## Table of Content
 - [project description](#description)
@@ -78,7 +113,7 @@ ${answers.description}
 ${answers.usage}
 
 ## License
-${answers.licensce}
+${presentlicensetext(answers.license)}
 
 ## Installations
 ${answers.installation}
@@ -92,8 +127,9 @@ ${answers.github}
 
 ## Test
 ${answers.test}`;
-
-promptUser()
-  .then((answers) => writeFileAsync("README.md", generateREADME(answers)))
-  .then(() => console.log("Successfully generated a README.md"))
-  .catch((err) => console.error(err));
+  // function that will handle prompting and generation of the read me file
+  promptUser()
+    .then((answers) => writeFileAsync("README.md", generateREADME(answers)))
+    .then(() => console.log("Successfully generated a README.md"))
+    .catch((err) => console.error(err));
+};
