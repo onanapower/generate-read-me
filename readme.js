@@ -73,23 +73,23 @@ function showBadge(license) {
 
 // //second function:
 
-// function showlicensedlinks(license) {
-//   const licensedlinks = {
-//     GNUPLv3: "[GNUPLv3](https://choosealicense.com/licenses/gpl-3.0/)",
-//     isc: "[ISC](https://choosealicense.com/licenses/isc/)",
-//     mit: "[MIT](https://choosealicense.com/licenses/mit/)",
-//   };
-//   return licensedlinks[license];
-// }
+function showlicensedlinks(license) {
+  const licensedlinks = {
+    GNUPLv3: "[GNUPLv3](https://choosealicense.com/licenses/gpl-3.0/)",
+    isc: "[ISC](https://choosealicense.com/licenses/isc/)",
+    mit: "[MIT](https://choosealicense.com/licenses/mit/)",
+  };
+  return licensedlinks[license];
+}
 
 // //3rd function:
-// function presentlicensetext() {
-//   if (license) {
-//     return `Licensed under the ${showlicensedlinks(license)} license`;
-//   } else {
-//     return "license not found";
-//   }
-// }
+function presentlicensetext(license) {
+  if (license) {
+    return `Licensed under the ${showlicensedlinks(license)} license`;
+  } else {
+    return "license not found";
+  }
+}
 // line 100 below is the expected place for the license badge to appear
 
 const generateREADME = (answers) => {
@@ -109,13 +109,13 @@ ${showBadge(answers.licenses)}
 - [Installations](#installations)
 
 ## Description
-${answers.description}
+${showlicensedlinks(answers.description)}
 
 ## usage
 ${answers.usage}
 
 ## License
-${answers.license}
+${presentlicensetext(answers.licenses)}
 
 ## Installations
 ${answers.installation}
