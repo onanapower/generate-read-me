@@ -109,7 +109,7 @@ ${showBadge(answers.licenses)}
 - [Installations](#installations)
 
 ## Description
-${showlicensedlinks(answers.description)}
+${answers.description}
 
 ## usage
 ${answers.usage}
@@ -125,7 +125,11 @@ ${answers.contributors}
 
 ## Questions
 ${answers.email}
+
 ${answers.github}
+
+## Video link:
+[Video](https://drive.google.com/file/d/1btHJZt5org90LxlWgxm5B-Wm5h-YGHgw/view)
 
 ## Test
 ${answers.test}`;
